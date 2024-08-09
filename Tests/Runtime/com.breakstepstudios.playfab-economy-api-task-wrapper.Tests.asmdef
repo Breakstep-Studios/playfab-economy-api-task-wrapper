@@ -1,7 +1,8 @@
 {
-    "name": "com.company.tool.Tests",
+    "name": "com.breakstepstudios.playfab-economy-api-task-wrapper.Editor",
     "references": [
-        "com.company.tool"
+        "com.breakstepstudios.playfab-economy-api-task-wrapper",
+        "com.breakstepstudios.playfab-client-api-task-wrapper"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"
