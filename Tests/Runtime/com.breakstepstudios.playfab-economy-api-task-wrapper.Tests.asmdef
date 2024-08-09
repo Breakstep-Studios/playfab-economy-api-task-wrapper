@@ -1,5 +1,5 @@
 {
-    "name": "com.breakstepstudios.playfab-economy-api-task-wrapper.Editor",
+    "name": "com.breakstepstudios.playfab-economy-api-task-wrapper.Tests",
     "references": [
         "com.breakstepstudios.playfab-economy-api-task-wrapper",
         "com.breakstepstudios.playfab-client-api-task-wrapper"
