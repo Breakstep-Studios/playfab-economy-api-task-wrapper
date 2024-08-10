@@ -24,6 +24,24 @@ namespace BreakstepStudios.Scripts.Runtime.PlayFab
             );
             return taskCompletionSource.Task;
         }
+
+                
+        /// <inheritdoc cref="PlayFabEconomyAPI.RedeemAppleAppStoreInventoryItems "/>
+        public static Task<PlayFabCommonResponse<RedeemAppleAppStoreInventoryItemsResponse>> RedeemAppleAppStoreInventoryItemsAsync(RedeemAppleAppStoreInventoryItemsRequest request)
+        {
+            var taskCompletionSource = new TaskCompletionSource<PlayFabCommonResponse<RedeemAppleAppStoreInventoryItemsResponse>>();
+            PlayFabEconomyAPI.RedeemAppleAppStoreInventoryItems(request,
+                (result) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<RedeemAppleAppStoreInventoryItemsResponse>(result,null));
+                },
+                (error) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<RedeemAppleAppStoreInventoryItemsResponse>(null,error));
+                }
+            );
+            return taskCompletionSource.Task;
+        }
         
     }
 }
