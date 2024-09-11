@@ -8,6 +8,24 @@ namespace BreakstepStudios.Scripts.Runtime.PlayFab
 {
     public static class PlayFabEconomyAPIWrapper
     {
+        
+        /// <inheritdoc cref="PlayFabEconomyAPI.GetInventoryItems"/>
+        public static Task<PlayFabCommonResponse<GetInventoryItemsResponse>> GetInventoryItemsAsync(GetInventoryItemsRequest request)
+        {
+            var taskCompletionSource = new TaskCompletionSource<PlayFabCommonResponse<GetInventoryItemsResponse>>();
+            PlayFabEconomyAPI.GetInventoryItems(request,
+                (result) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<GetInventoryItemsResponse>(result,null));
+                },
+                (error) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<GetInventoryItemsResponse>(null,error));
+                }
+            );
+            return taskCompletionSource.Task;
+        }
+        
         /// <inheritdoc cref="PlayFabEconomyAPI.RedeemGooglePlayInventoryItems"/>
         public static Task<PlayFabCommonResponse<RedeemGooglePlayInventoryItemsResponse>> RedeemGooglePlayInventoryItemsAsync(RedeemGooglePlayInventoryItemsRequest request)
         {
@@ -24,7 +42,6 @@ namespace BreakstepStudios.Scripts.Runtime.PlayFab
             );
             return taskCompletionSource.Task;
         }
-
                 
         /// <inheritdoc cref="PlayFabEconomyAPI.RedeemAppleAppStoreInventoryItems "/>
         public static Task<PlayFabCommonResponse<RedeemAppleAppStoreInventoryItemsResponse>> RedeemAppleAppStoreInventoryItemsAsync(RedeemAppleAppStoreInventoryItemsRequest request)
