@@ -60,5 +60,21 @@ namespace BreakstepStudios.Scripts.Runtime.PlayFab
             return taskCompletionSource.Task;
         }
         
+        // <inheritdoc cref="PlayFabEconomyAPI.SearchItems"/>
+        public static Task<PlayFabCommonResponse<SearchItemsResponse>> SearchItemsAsync(SearchItemsRequest request)
+        {
+            var taskCompletionSource = new TaskCompletionSource<PlayFabCommonResponse<SearchItemsResponse>>();
+            PlayFabEconomyAPI.SearchItems(request,
+                (result) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<SearchItemsResponse>(result,null));
+                },
+                (error) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<SearchItemsResponse>(null,error));
+                }
+            );
+            return taskCompletionSource.Task;
+        }
     }
 }
