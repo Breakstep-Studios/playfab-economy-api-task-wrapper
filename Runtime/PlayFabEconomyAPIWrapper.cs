@@ -76,5 +76,23 @@ namespace BreakstepStudios.Scripts.Runtime.PlayFab
             );
             return taskCompletionSource.Task;
         }
+
+        /// <inheritdoc cref="PlayFabEconomyAPI.DeleteItem"/>
+        public static Task<PlayFabCommonResponse<DeleteItemResponse>> DeleteItemAsync(DeleteItemRequest request)
+        {
+            var taskCompletionSource = new TaskCompletionSource<PlayFabCommonResponse<DeleteItemResponse>>();
+            PlayFabEconomyAPI.DeleteItem(request,
+                (result) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<DeleteItemResponse>(result, null));
+                },
+                (error) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<DeleteItemResponse>(null, error));
+                }
+            );
+            return taskCompletionSource.Task;
+        }
+
     }
 }
