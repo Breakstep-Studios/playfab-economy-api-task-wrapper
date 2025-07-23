@@ -94,5 +94,22 @@ namespace BreakstepStudios.Scripts.Runtime.PlayFab
             return taskCompletionSource.Task;
         }
 
+        /// <inheritdoc cref="PlayFabEconomyAPI.CreateUploadUrls"/>
+        public static Task<PlayFabCommonResponse<CreateUploadUrlsResponse>> CreateUploadUrlsAsync(
+            CreateUploadUrlsRequest request)
+        {
+            var taskCompletionSource = new TaskCompletionSource<PlayFabCommonResponse<CreateUploadUrlsResponse>>();
+            PlayFabEconomyAPI.CreateUploadUrls(request,
+                (result) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<CreateUploadUrlsResponse>(result, null));
+                },
+                (error) =>
+                {
+                    taskCompletionSource.SetResult(new PlayFabCommonResponse<CreateUploadUrlsResponse>(null, error));
+                }
+            );
+            return taskCompletionSource.Task;
+        }
     }
 }
